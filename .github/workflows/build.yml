@@ -12,5 +12,11 @@ jobs:
         - name: Clonar repositorio
           uses: actions/checkout@v4
 
+        - name: Docker Login
+          uses: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
         - name: Construir image
-          run: docker build -t node-test:1 .
+          run: docker build -t victor-crea/node-test:latest .
+
+        - name: Publicar en Docker Hub
+          run: docker push victor-crea/node-test:latest
